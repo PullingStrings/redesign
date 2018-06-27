@@ -5,6 +5,7 @@ const cleanCSS 	  = require('gulp-clean-css');
 const uglify      = require('gulp-uglify');
 const browserSync = require('browser-sync').create();
 
+
 gulp.task('es6', () => {
   return gulp.src('src/js/*.js')
     .pipe(babel({ presets: ['es2015'] }))
