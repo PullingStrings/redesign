@@ -1,1 +1,1 @@
-"use strict";$(function(){alert("Ready")});
+"use strict";$(function(){console.log("Ready")});

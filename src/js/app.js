@@ -1,3 +1,3 @@
 $(() => {
-  alert('Ready');
+  console.log('Ready');
 });
