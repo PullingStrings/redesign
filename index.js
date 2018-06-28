@@ -1,6 +1,7 @@
 const expressLayouts    = require('express-ejs-layouts');
 const express           = require('express');
-
+const sassMiddleware    = require('node-sass-middleware');
+const path              = require('path');
 // creating an express app, which will allow us to
 // configure some HTTP handlers
 const app = express();
@@ -22,9 +23,19 @@ app.use(morgan('dev'));
 
 // request handlers
 
-app.use(express.static(`${__dirname}/public`));
+app.use(
+    sassMiddleware({
+        src: __dirname + '/sass', //where the sass files are
+        dest: path.join(__dirname, 'public'), //where css should go
+        debug: true // obvious
+    })
+);
+
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use(expressLayouts);
+
+
 
 app.get('/', (req, res) => {
   return res.render('index', { heading: 'This is the Homepage' });
