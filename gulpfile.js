@@ -1,10 +1,9 @@
-const gulp        = require('gulp');
-const babel       = require('gulp-babel');
-const sass        = require('gulp-sass');
-const cleanCSS 	  = require('gulp-clean-css');
-const uglify      = require('gulp-uglify');
-const browserSync = require('browser-sync').create();
-
+const gulp            = require('gulp');
+const babel           = require('gulp-babel');
+const sass            = require('gulp-sass');
+const cleanCSS 	      = require('gulp-clean-css');
+const uglify          = require('gulp-uglify');
+const browserSync     = require('browser-sync').create();
 
 gulp.task('es6', () => {
   return gulp.src('src/js/*.js')
