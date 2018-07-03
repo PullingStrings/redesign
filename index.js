@@ -59,6 +59,24 @@ app.get('/performances', (req, res) => {
 app.get('/docuvideo', (req, res) => {
   return res.render('docuvideo');
 });
+app.get('/tito', (req, res) => {
+  return res.render('tito');
+});
+app.get('/moonchild', (req, res) => {
+  return res.render('moonchild');
+});
+app.get('/sam', (req, res) => {
+  return res.render('sam');
+});
+app.get('/simz', (req, res) => {
+  return res.render('simz');
+});
+app.get('/essu', (req, res) => {
+  return res.render('essu');
+});
+app.get('/emma', (req, res) => {
+  return res.render('emma');
+});
 
 
 app.get('/*', (req, res) => {
