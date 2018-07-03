@@ -1,1 +1,29 @@
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
 
+nav img {
+  width: 8%;
+}
+
+.artists .col{
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 40px 10px;
+  margin: 15px 40px;
+  text-align: center;
+  align-items: center;
+  text-transform: uppercase;
+
+}
+.content {
+  flex: 1 0 auto;
+}
+.footer {
+  background-color: black;
+  flex-shrink: 0;
+}

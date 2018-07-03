@@ -1,6 +1,7 @@
 const expressLayouts    = require('express-ejs-layouts');
 const express           = require('express');
 const scss              = require('node-sass-middleware');
+const path              = require('path');
 // creating an express app, which will allow us to
 // configure some HTTP handlers
 const app = express();
@@ -15,25 +16,25 @@ app.set('view engine', 'ejs');
 // tell ejs to look for the templates in the `views` folder
 app.set('views', `${__dirname}/views`);
 
+app.set()
 // add some middleware
 // tell express to use morgan
 // tell morgan to us the `dev` setting
 app.use(morgan('dev'));
 
+
 // request handlers
 app.use(scss({
         src: __dirname + '/scss', //where the scss files are
-        dest: __dirname + '/public', //where css should go
+        dest: path.join(__dirname, 'public'), //where css should go
+        sourceMap: true,
         debug: true // obvious
     })
 );
 
-app.use(express.static(`${__dirname}/public`));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use(expressLayouts);
-
-
-
 
 
 app.get('/', (req, res) => {
