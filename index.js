@@ -60,6 +60,7 @@ app.get('/docuvideo', (req, res) => {
   return res.render('docuvideo');
 });
 
+
 app.get('/*', (req, res) => {
   return res.status(404).send('Not found');
 });
