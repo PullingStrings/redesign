@@ -10,6 +10,41 @@ nav img {
   width: 8%;
 }
 
+.about .col a:hover {
+  text-decoration: none;
+}
+
+.about a {
+  color: black;
+  text-decoration: none;
+}
+
+.about .col {
+    border: 1px solid black;
+    color: black;
+    width: 100px;
+    height: 20rem;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50%;
+    margin: 20px;
+    text-align: center;
+    padding-top: 8rem;
+}
+
+
+.about-info .col {
+  border: none;
+  padding: 10px 10px;
+  margin: 10px 10px;
+  text-align: left;
+  background: none;
+  height: fit-content;
+}
+
+.about-info .col:hover {
+}
+
 .artists .col{
   border: 1px solid black;
   border-radius: 3px;
@@ -20,6 +55,14 @@ nav img {
   text-transform: uppercase;
 
 }
+
+.artists {
+
+}
+
+.col:hover {
+}
+
 .content {
   flex: 1 0 auto;
 }
