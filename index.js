@@ -1,87 +1,29 @@
-const expressLayouts    = require('express-ejs-layouts');
-const express           = require('express');
-const scss              = require('node-sass-middleware');
-const path              = require('path');
-// creating an express app, which will allow us to
-// configure some HTTP handlers
+const express = require('express');
 const app = express();
 
-// morgan is for logging requests to the terminal
-// storing morgan module into `morgan`variable to use later
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+mongoose.plugin(require('mongoose-unique-validator'));
+mongoose.plugin(require('./lib/globalToJSON'));
+mongoose.Promise = require('bluebird');
+const { port, dbURI } = require('./config/environment');
+const routes = require('./config/routes');
+const errorHandler = require('./lib/errorHandler');
+const customResponses = require('./lib/customResponses');
 
-// modify Express settings
-// tell express to use `ejs` for templating
-app.set('view engine', 'ejs');
-// tell ejs to look for the templates in the `views` folder
-app.set('views', `${__dirname}/views`);
+mongoose.connect(dbURI, { useMongoClient: true });
 
-app.set()
-// add some middleware
-// tell express to use morgan
-// tell morgan to us the `dev` setting
 app.use(morgan('dev'));
 
+app.use(express.static(`${__dirname}/public`));
+app.use(bodyParser.json());
 
-// request handlers
-app.use(scss({
-        src: __dirname + '/scss', //where the scss files are
-        dest: path.join(__dirname, 'public'), //where css should go
-        sourceMap: true,
-        debug: true // obvious
-    })
-);
+app.use(customResponses);
 
-app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/api', routes);
+app.get('/*', (req, res) => res.sendFile(`${__dirname}/public/index.html`));
 
-app.use(expressLayouts);
+app.use(errorHandler);
 
-
-app.get('/', (req, res) => {
-  return res.render('index', { heading: 'This is the Homepage' });
-});
-
-app.get('/about', (req, res) => {
-  return res.render('about');
-});
-app.get('/artists', (req, res) => {
-  return res.render('artists');
-});
-app.get('/gallery', (req, res) => {
-  return res.render('gallery');
-});
-app.get('/workshops', (req, res) => {
-  return res.render('workshops');
-});
-app.get('/performances', (req, res) => {
-  return res.render('performances');
-});
-app.get('/docuvideo', (req, res) => {
-  return res.render('docuvideo');
-});
-app.get('/tito', (req, res) => {
-  return res.render('tito');
-});
-app.get('/moonchild', (req, res) => {
-  return res.render('moonchild');
-});
-app.get('/sam', (req, res) => {
-  return res.render('sam');
-});
-app.get('/simz', (req, res) => {
-  return res.render('simz');
-});
-app.get('/essu', (req, res) => {
-  return res.render('essu');
-});
-app.get('/emma', (req, res) => {
-  return res.render('emma');
-});
-
-
-app.get('/*', (req, res) => {
-  return res.status(404).send('Not found');
-});
-
-// Start it up!
-app.listen(3000, () => console.log('Express is up and running'));
+app.listen(port, () => console.log(`Express is listening on port ${port}`));
